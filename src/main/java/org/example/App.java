@@ -16,9 +16,16 @@ public class App
 
         //Gender Input
         System.out.print("Enter a 1 if you are male or a 2 if you are a female: ");
-        int gender = scanner.nextInt();
+        String strGender = scanner.next();
+
+        //Confirm its numeric
+        if(!strGender.matches("[0-9]+")) {
+            System.out.println("Invalid Input");
+            System.exit(0);
+        }
 
         //Gender Sort
+        int gender = Integer.parseInt(strGender);
         double distRatio = 0;
         if(gender == 1) {
             distRatio = 0.73;
@@ -26,15 +33,28 @@ public class App
             distRatio = 0.66;
         } else {
             System.out.println("Incorrect input given.");
+            System.exit(0);
         }
 
         //Alcohol Consumption and Weight Inputs
         System.out.print("How many ounces of alcohol did you have? ");
-        int alc = scanner.nextInt();
+        String strAlc = scanner.next();
         System.out.print("What is your weight, in pounds? ");
-        int weight = scanner.nextInt();
+        String strWeight = scanner.next();
         System.out.print("How many hours has it been since your last drink? ");
-        int hours = scanner.nextInt();
+        String strHours = scanner.next();
+
+        //Check if numerical
+        if(!strAlc.matches("[0-9]+") || !strWeight.matches("[0-9]+")
+                || !strHours.matches("[0-9]+")) {
+            System.out.println("Invalid Input");
+            System.exit(0);
+        }
+
+        //Parse Inputs
+        int alc = Integer.parseInt(strAlc);
+        int weight = Integer.parseInt(strWeight);
+        int hours = Integer.parseInt(strHours);
 
         //Calculation
         double bloodAlc = (alc * 5.14 / weight * distRatio) - .015 * hours;
